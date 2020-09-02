@@ -1,6 +1,6 @@
 import numpy as np
 import random
-import visualizer
+import screen
 import time
 
 class Algorithm():
@@ -12,8 +12,8 @@ class Algorithm():
         self.name = name
     
     def update_screen(self, swap1 = None, swap2 = None):
-        # Give the indexes to be swapped into the visualizer 
-        viusalizer.update(self, swap1, swap2)
+        # Give the indexes to be swapped into the screen 
+        screen.update(self, swap1, swap2)
     
     # Start the timer and the algorithm
     def start(self):
@@ -26,6 +26,15 @@ class Algorithm():
 class SelectionSort(Algorithm):
     def __init__(self):
         super().__init__("SelectionSort")
+
+    def algorithm(self):
+        for i in range(len(self.array)):
+            minimum_index = i
+            for j in range(i + 1, len(self.array)):
+                if self.array[minimum_index] > self.array[j]:
+                    minimum_index = j
+                self.array[minimum_index], self.array[i] = self.array[i], self.array[minimum_index]
+                self.update_screen(self.array[i], self.array[minimum_index])
 
 class BubbleSort(Algorithm):
     def __init__(self):
@@ -56,11 +65,19 @@ class OptimizedBubbleSort(Algorithm):
                         break
             self.update_screen(self.array[j], self.array[j + 1])
 
-
-
 class InsertionSort(Algorithm):
     def __init__(self):
         super().__init__("InsertionSort")
+    
+    def algorithm(self):
+        for i in range(1, len(self.array)):
+            key = self.array[i]
+            index = i - 1
+            while index >= 0 and self.array[index] > key:
+                self.array[index + 1] = self.array[index]
+                index -= 1
+            self.array[index + 1] = key
+            self.update_screen(self.array[index + 1], self.array[i])
 
 class MergeSort(Algorithm):
     def __init__(self):
@@ -69,3 +86,33 @@ class MergeSort(Algorithm):
 class QuickSort(Algorithm):
     def __init__(self):
         super().__init__("QuickSort")
+    
+    def partition(self, arr, low, high):
+
+        i = low - 1
+
+        # pivot
+        pivot = arr[high] 
+
+        for j in range(low, high):
+
+            if arr[j] < pivot:
+
+                i += 1
+                arr[i], arr[j] = arr[j], arr[i]
+                self.update_screen(arr[i], arr[j])
+        
+        arr[i + 1], arr[high] = arr[high], arr[i + 1]
+        return i + 1
+
+    def algorithm(self, arr = [], low = 0, high = 0):
+        if arr = []:
+            arr = self.array
+            high = len(arr) - 1
+
+        if low < high:
+
+            pi = self.partition(arr, low, high)
+
+            self.algorithm(arr, low, pi - 1)
+            self.algorithm(arr, pi + 1, high)
