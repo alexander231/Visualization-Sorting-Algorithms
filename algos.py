@@ -7,12 +7,13 @@ class Algorithm():
 
     def __init__(self, name):
         # This is a random array of size 1024, with elements from 0 to 1024
-        self.array = np.random.rand.randint(1024, size = 1024)
+        self.array = np.random.randint(1024, size = 1024)
         # The name of the sorting algorithm that whe choose
         self.name = name
     
     def update_screen(self, swap1 = None, swap2 = None):
         # Give the indexes to be swapped into the screen 
+        
         screen.update(self, swap1, swap2)
     
     # Start the timer and the algorithm
@@ -38,7 +39,7 @@ class SelectionSort(Algorithm):
 
 class BubbleSort(Algorithm):
     def __init__(self):
-        super.__init__("BubbleSort")
+        super().__init__("BubbleSort")
 
     def algorithm(self):
 
@@ -50,7 +51,7 @@ class BubbleSort(Algorithm):
 
 class OptimizedBubbleSort(Algorithm):
     def __init__(self):
-        super.__init__("OptimizedBubbleSort")
+        super().__init__("OptimizedBubbleSort")
     
     def algorithm(self):
 
@@ -106,7 +107,7 @@ class QuickSort(Algorithm):
         return i + 1
 
     def algorithm(self, arr = [], low = 0, high = 0):
-        if arr = []:
+        if arr == []:
             arr = self.array
             high = len(arr) - 1
 
