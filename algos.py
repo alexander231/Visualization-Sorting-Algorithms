@@ -1,13 +1,12 @@
 import numpy as np
 import random
-import screen
 import time
 
 class Algorithm():
 
     def __init__(self, name):
         # This is a random array of size 1024, with elements from 0 to 1024
-        self.array = np.random.randint(1024, size = 1024)
+        self.array = np.random.randint(500, size = 500)
         # The name of the sorting algorithm that whe choose
         self.name = name
     
@@ -117,3 +116,25 @@ class QuickSort(Algorithm):
 
             self.algorithm(arr, low, pi - 1)
             self.algorithm(arr, pi + 1, high)
+
+class TimSort(Algorithm):
+    pass
+
+class HeapSort(Algorithm):
+    pass
+
+class TreeSort(Algorithm):
+    pass
+
+class ShellSort(Algorithm):
+    pass
+
+class BucketSort(Algorithm):
+    pass
+
+class RadixSort(Algorithm):
+    pass
+class CountingSort(Algorithm):
+    pass
+class CubeSort(Algorithm):
+    pass

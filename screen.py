@@ -1,74 +1,72 @@
-import algos
-import time
-import os
-import sys
 import pygame
-
-dimensions = [2048, 1024]
-algs = {"SelectionSort": algos.SelectionSort(), "BubbleSort": algos.BubbleSort(), "OptimizedBubbleSort": algos.OptimizedBubbleSort(), "InsertionSort": algos.InsertionSort(), "MergeSort": algos.MergeSort(), "QuickSort": algos.QuickSort() }
-
-if len(sys.argv) > 1:
-    if sys.argv[1] == "list":
-        for key in algs.keys(): print(key, end = " ")
-        print("")
-        sys.exit(0)
-
+import sys
+import algos
+from menu import draw_menu, draw_text, drawTextcenter
+from constants import ROWS, COLS, SQUARE_SIZE, MENU_DIMENSIONS, SORTING_DIMENSIONS, BG_COLOR
+algorithms = {"SelectionSort": algos.SelectionSort(), "BubbleSort": algos.BubbleSort(), "OptimizedBubbleSort": algos.OptimizedBubbleSort()}
 
 pygame.init()
 
-display_screen = pygame.display.set_mode((dimensions[0], dimensions[1]))
 
-display_screen.fill(pygame.Color("#fbefcc"))
-
-
-def check_events():
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
+#create screen
+screen_Sorting = pygame.display.set_mode((SORTING_DIMENSIONS[0], SORTING_DIMENSIONS[1]))
+screen_Menu = pygame.display.set_mode((MENU_DIMENSIONS[0], MENU_DIMENSIONS[1]))
 
 
 
-def update(algos, swap1 = None, swap2 = None, display = display_screen):
-    display.fill(pygame.Color("#fbefcc"))
-    pygame.display.set_caption("Sorting Visualizer    Algorithm: {}     Time: {:.3f}     Status: Sorting...".format(algos.start_time))
-    k = int(dimensions[0] / len(algos.array))
-    for i in range(len(algos.array)):
+running = True
+arr = algos.SelectionSort()
+k = int(SORTING_DIMENSIONS[0]/len(arr.array))
+font = pygame.font.SysFont("freesansbold.ttf", 40)
 
-        colour = (80, 0, 255)
 
-        if swap1 == algos.array[i]:
+def draw_button(text, font, color, surface, x, y):
+    textobj = font.render(text, 1, color)
+    textrect = textobj.get_rect()
+    textrect.topleft = (x, y)
+    surface.blit(textobj, textrect)
 
-            colour = (0, 255, 0)
-        
-        elif swap2 == algos.array[i]:
 
-            colour = (255, 0, 0)
-        pygame.draw.rect(display, colour, (i * k, dimensions[1], k ,-algos.array[i]))
+def menu_algorithms():
+    global running
 
-    check_events()
-    pygame.display.update()
-
-def keep_ope(algos, display, time):
-    pygame.display.set_caption("Sorting Visualizer     Algorithm: {}     Time: {:.3f}      Status: Done!".format(algorithm.name, time))
-    while True:
-        check_events()
+    draw_menu(screen_Menu)
+    BubbleSortB = drawTextcenter("BubbleSort", font, (255,255,255), screen_Menu, 100, 100)
+    
+    OptimizedBubbleSortB = drawTextcenter("SelectionSort", font, (255,255,255), screen_Menu, 300, 100)
+    
+    
+    
+    
+    
+    while running:
+       
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+                pygame.quit()
+                sys.exit()
+            
         pygame.display.update()
 
-def main():
-    if len(sys.argv) < 2:
-        print("Please select a sorting algorithm.") 
-    else:
-        try:
-            algorithm = algorithms[sys.argv[1]] # Pass the algorithm selected
-            try:
-                time_elapsed = algorithm.run()[1]
-                keep_open(algorithm, display, time_elapsed)
-                pass
-            except:
-                pass
-        except:
-            print("Error.")
+def running():
+    global running
+    while running:
 
-if __name__ == "__main__":
-    main()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+                pygame.quit()
+                sys.exit()
+            screen.fill(background_color)
+
+            for i in range(len(arr.array)):
+                pygame.draw.rect(screenSorting, (255, 0 , 0), (i*k, 500, k, -arr.array[i]))
+            pygame.display.update()
+
+menu_algorithms()
+        
+
+        
+        
+            
