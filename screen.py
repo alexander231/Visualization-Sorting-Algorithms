@@ -20,26 +20,17 @@ k = int(SORTING_DIMENSIONS[0]/len(arr.array))
 font = pygame.font.SysFont("freesansbold.ttf", 40)
 
 
-def draw_button(text, font, color, surface, x, y):
-    textobj = font.render(text, 1, color)
-    textrect = textobj.get_rect()
-    textrect.topleft = (x, y)
-    surface.blit(textobj, textrect)
 
 
 def menu_algorithms():
     global running
 
-    draw_menu(screen_Menu)
-    BubbleSortB = drawTextcenter("BubbleSort", font, (255,255,255), screen_Menu, 100, 100)
-    
-    OptimizedBubbleSortB = drawTextcenter("SelectionSort", font, (255,255,255), screen_Menu, 300, 100)
-    
-    
-    
+    #draw_menu(screen_Menu)
+    screen_Menu.fill(BG_COLOR)
     
     
     while running:
+        (X_MOUSE, Y_MOUSE) = pygame.mouse.get_pos()
        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -47,7 +38,110 @@ def menu_algorithms():
                 pygame.quit()
                 sys.exit()
             
-        pygame.display.update()
+            BubbleSortB = drawTextcenter("BubbleSort", font, (255,255,255), screen_Menu, 100, 100)
+            
+            if X_MOUSE < 200 and Y_MOUSE < 200:
+                pygame.draw.rect(screen_Menu, (255,0,0), (0, 0, SQUARE_SIZE, SQUARE_SIZE))
+            else:
+                pygame.draw.rect(screen_Menu, (22, 100, 100), (0, 0, SQUARE_SIZE, SQUARE_SIZE))    
+            if X_MOUSE > 200 and X_MOUSE < 400 and Y_MOUSE < 200:
+                pygame.draw.rect(screen_Menu, (255, 0, 0), (200, 0, SQUARE_SIZE, SQUARE_SIZE))
+            else:
+                pygame.draw.rect(screen_Menu, (0, 0, 0), (200, 0, SQUARE_SIZE, SQUARE_SIZE))
+            if X_MOUSE > 400 and X_MOUSE < 600 and Y_MOUSE < 200:
+                pygame.draw.rect(screen_Menu, (255, 0, 0), (400, 0, SQUARE_SIZE, SQUARE_SIZE))
+            else:
+                pygame.draw.rect(screen_Menu, (22, 100, 100), (400, 0, SQUARE_SIZE, SQUARE_SIZE))
+            if X_MOUSE > 600 and X_MOUSE < 800 and Y_MOUSE < 200:
+                pygame.draw.rect(screen_Menu, (255, 0, 0), (600, 0, SQUARE_SIZE, SQUARE_SIZE))
+            else:
+                pygame.draw.rect(screen_Menu, (0, 0, 0), (600, 0, SQUARE_SIZE, SQUARE_SIZE))
+            if X_MOUSE > 800 and X_MOUSE < 1000 and Y_MOUSE < 200:
+                pygame.draw.rect(screen_Menu, (255, 0, 0), (800, 0, SQUARE_SIZE, SQUARE_SIZE))
+            else:
+                pygame.draw.rect(screen_Menu, (22, 100, 100), (800, 0, SQUARE_SIZE, SQUARE_SIZE))
+            if  X_MOUSE < 200 and Y_MOUSE > 200 and Y_MOUSE < 400:
+                pygame.draw.rect(screen_Menu, (255, 0, 0), (0, 200, SQUARE_SIZE, SQUARE_SIZE))
+            else:
+                pygame.draw.rect(screen_Menu, (0, 0, 0), (0, 200, SQUARE_SIZE, SQUARE_SIZE))
+            if X_MOUSE > 200 and X_MOUSE < 400 and Y_MOUSE > 200 and Y_MOUSE < 400:
+                pygame.draw.rect(screen_Menu, (255, 0, 0), (200, 200, SQUARE_SIZE, SQUARE_SIZE))
+            else:
+                pygame.draw.rect(screen_Menu, (22, 100, 100), (200, 200, SQUARE_SIZE, SQUARE_SIZE))
+            if X_MOUSE > 400 and X_MOUSE < 600 and Y_MOUSE > 200 and Y_MOUSE < 400:
+                pygame.draw.rect(screen_Menu, (255, 0, 0), (400, 200, SQUARE_SIZE, SQUARE_SIZE))
+            else:
+                pygame.draw.rect(screen_Menu, (0, 0, 0), (400, 200, SQUARE_SIZE, SQUARE_SIZE))
+            if X_MOUSE > 600 and X_MOUSE < 800 and Y_MOUSE > 200 and Y_MOUSE < 400:
+                pygame.draw.rect(screen_Menu, (255, 0, 0), (600, 200, SQUARE_SIZE, SQUARE_SIZE))
+            else:
+                pygame.draw.rect(screen_Menu, (22, 100, 100), (600, 200, SQUARE_SIZE, SQUARE_SIZE))
+            if X_MOUSE > 800 and Y_MOUSE > 200 and Y_MOUSE < 400:
+                pygame.draw.rect(screen_Menu, (255, 0, 0), (800, 200, SQUARE_SIZE, SQUARE_SIZE))
+            else:
+                pygame.draw.rect(screen_Menu, (0, 0, 0), (800, 200, SQUARE_SIZE, SQUARE_SIZE))
+            if X_MOUSE < 200 and Y_MOUSE > 400 :
+                pygame.draw.rect(screen_Menu, (255, 0, 0), (0, 400, SQUARE_SIZE, SQUARE_SIZE))
+            else:
+                pygame.draw.rect(screen_Menu, (22, 100, 100), (0, 400, SQUARE_SIZE, SQUARE_SIZE))
+            if X_MOUSE > 200 and X_MOUSE < 400 and Y_MOUSE > 400:
+                pygame.draw.rect(screen_Menu, (255, 0, 0), (200, 400, SQUARE_SIZE, SQUARE_SIZE))
+            else:
+                pygame.draw.rect(screen_Menu, (0, 0, 0), (200, 400, SQUARE_SIZE, SQUARE_SIZE))
+            if X_MOUSE > 400 and X_MOUSE < 600 and Y_MOUSE > 400:
+                pygame.draw.rect(screen_Menu, (255, 0, 0), (400, 400, SQUARE_SIZE, SQUARE_SIZE))
+            else:
+                pygame.draw.rect(screen_Menu, (22, 100, 100), (400, 400, SQUARE_SIZE, SQUARE_SIZE))
+            if X_MOUSE > 600 and X_MOUSE < 800 and Y_MOUSE > 400:
+                pygame.draw.rect(screen_Menu, (255, 0, 0), (600, 400, SQUARE_SIZE, SQUARE_SIZE))
+            else:
+                pygame.draw.rect(screen_Menu, (0, 0, 0), (600, 400, SQUARE_SIZE, SQUARE_SIZE))
+            if X_MOUSE > 800 and Y_MOUSE > 400:
+                pygame.draw.rect(screen_Menu, (255, 0, 0), (800, 400, SQUARE_SIZE, SQUARE_SIZE))
+            else:
+                pygame.draw.rect(screen_Menu, (22, 100, 100), (800, 400, SQUARE_SIZE, SQUARE_SIZE))
+
+
+            drawTextcenter("BubbleSort", font, (255,255,255), screen_Menu, 100, 100)
+            
+            drawTextcenter("OBubbleSort", font, (255,255,255), screen_Menu, 300, 100)
+
+            drawTextcenter("SelectionSort", font, (255,255,255), screen_Menu, 500, 100)
+
+            drawTextcenter("InsertionSort", font, (255,255,255), screen_Menu, 700, 100)
+
+            drawTextcenter("MergeSort", font, (255,255,255), screen_Menu, 900, 100)
+
+            drawTextcenter("QuickSort", font, (255,255,255), screen_Menu, 100, 300)
+
+            drawTextcenter("HeapSort", font, (255,255,255), screen_Menu, 300, 300)
+
+            drawTextcenter("TreeSort", font, (255,255,255), screen_Menu, 500, 300)
+
+            drawTextcenter("ShellSort", font, (255,255,255), screen_Menu, 700, 300)
+
+            drawTextcenter("BucketSort", font, (255,255,255), screen_Menu, 900, 300)
+
+            drawTextcenter("RadixSort", font, (255,255,255), screen_Menu, 100, 500)
+
+            drawTextcenter("CountingSort", font, (255,255,255), screen_Menu, 300, 500)
+
+            drawTextcenter("CubeSort", font, (255,255,255), screen_Menu, 500, 500)
+            
+            drawTextcenter("TimSort", font, (255,255,255), screen_Menu, 700, 500)
+
+            drawTextcenter("Exit", font, (255,255,255), screen_Menu, 900, 500)
+
+            if X_MOUSE > 800 and Y_MOUSE > 400 and pygame.MOUSEBUTTONDOWN is False:
+                
+                pass
+
+
+
+
+
+
+            pygame.display.update()
 
 def running():
     global running
