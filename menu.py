@@ -14,7 +14,7 @@ def draw_text(text, font, color, surface, x, y):
     textrect.topleft = (x, y)
     surface.blit(textobj, textrect)
 
-def drawTextcenter(text,font, color, screen, x, y):
+def draw_Text_center(text,font, color, screen, x, y):
     textobj=font.render(text,True,color)
     textrect=textobj.get_rect(center=(x,y))
     screen.blit(textobj,textrect)

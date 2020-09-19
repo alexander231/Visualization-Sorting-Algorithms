@@ -1,19 +1,20 @@
 import numpy as np
 import random
 import time
+import pygame
 
-class Algorithm():
+class Algorithm:
 
     def __init__(self, name):
         # This is a random array of size 1024, with elements from 0 to 1024
-        self.array = np.random.randint(500, size = 500)
+        self.array = np.random.randint(513, size = 512)
         # The name of the sorting algorithm that whe choose
         self.name = name
     
     def update_screen(self, swap1 = None, swap2 = None):
         # Give the indexes to be swapped into the screen 
         
-        screen.update(self, swap1, swap2)
+        visuallizer.update(self, swap1, swap2)
     
     # Start the timer and the algorithm
     def start(self):
@@ -23,47 +24,8 @@ class Algorithm():
         time_elapsed = time.time() - self.start_time
         return self.array, time_elapsed
 
-class SelectionSort(Algorithm):
-    def __init__(self):
-        super().__init__("SelectionSort")
 
-    def algorithm(self):
-        for i in range(len(self.array)):
-            minimum_index = i
-            for j in range(i + 1, len(self.array)):
-                if self.array[minimum_index] > self.array[j]:
-                    minimum_index = j
-                self.array[minimum_index], self.array[i] = self.array[i], self.array[minimum_index]
-                self.update_screen(self.array[i], self.array[minimum_index])
 
-class BubbleSort(Algorithm):
-    def __init__(self):
-        super().__init__("BubbleSort")
-
-    def algorithm(self):
-
-        for i in range(len(self.array)):
-            for j in range(0, len(self.array) - i - 1):
-                if self.array[j] > self.array[j + 1]:
-                    self.array[j], self.array[j + 1] = self.array[j + 1], self.array[j]
-            self.update_screen(self.array[j], self.array[j + 1])
-
-class OptimizedBubbleSort(Algorithm):
-    def __init__(self):
-        super().__init__("OptimizedBubbleSort")
-    
-    def algorithm(self):
-
-        for i in range(len(self.array)):
-            swapped = True
-            for j in range(0, len(self.array) - i - 1):
-                if self.array[j] > self.array[j + 1]:
-                    self.array[j], self.array[j + 1] = self.array[j +1], self.array[j]
-                    swapped = False
-
-                    if swapped:
-                        break
-            self.update_screen(self.array[j], self.array[j + 1])
 
 class InsertionSort(Algorithm):
     def __init__(self):
@@ -117,6 +79,7 @@ class QuickSort(Algorithm):
             self.algorithm(arr, low, pi - 1)
             self.algorithm(arr, pi + 1, high)
 
+
 class TimSort(Algorithm):
     pass
 
@@ -138,3 +101,53 @@ class CountingSort(Algorithm):
     pass
 class CubeSort(Algorithm):
     pass
+class OptimizedBubbleSort(Algorithm):
+    def __init__(self):
+        super().__init__("OptimizedBubbleSort")
+    
+    def algorithm(self):
+
+        for i in range(len(self.array)):
+            swapped = True
+            for j in range(0, len(self.array) - i - 1):
+                if self.array[j] > self.array[j + 1]:
+                    self.array[j], self.array[j + 1] = self.array[j +1], self.array[j]
+                    swapped = False
+
+                    if swapped:
+                        break
+            self.update_screen(self.array[j], self.array[j + 1])
+class BubbleSort(Algorithm):
+    def __init__(self):
+        super().__init__("BubbleSort")
+
+    def algorithm(self):
+
+        for i in range(len(self.array)):
+            for j in range(0, len(self.array) - i - 1):
+                if self.array[j] > self.array[j + 1]:
+                    self.array[j], self.array[j + 1] = self.array[j + 1], self.array[j]
+            self.update_screen(self.array[j], self.array[j + 1])
+
+class SelectionSort(Algorithm):
+    def __init__(self):
+        super().__init__("SelectionSort")
+
+    def algorithm(self):
+        for i in range(len(self.array)):
+            minimum_index = i
+            for j in range(i + 1, len(self.array)):
+                if self.array[minimum_index] > self.array[j]:
+                    minimum_index = j
+            self.array[i], self.array[minimum_index] = self.array[minimum_index], self.array[i]
+            for i in range(len(arr.array)):
+                colour = (80, 0, 255)
+                if swap1 == arr.array[i]:
+                    colour = (0,255,0)
+                elif swap2 == arr.array[i]:
+                    colour = (255,0,0)
+                # The most important step that renders the rectangles to the screen that gets sorted.
+                # pygame.draw.rect(dsiplay_window, color_of_rectangle, size_of_rectangle)
+                pygame.draw.rect(display, colour, (i*k,dimensions[1],k,-algorithm.array[i]))
+
+
