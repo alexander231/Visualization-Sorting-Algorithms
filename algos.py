@@ -131,9 +131,6 @@ class QuickSort(Algorithm):
             self.algorithm(arr, low, pi - 1)
             self.algorithm(arr, pi + 1, high)
 
-
-class TimSort(Algorithm):
-    pass
 #checked6
 class HeapSort(Algorithm):
     def __init__(self):
@@ -179,8 +176,6 @@ class HeapSort(Algorithm):
             arr[i], arr[0] = arr[0], arr[i]  # swap
             self.heapify(arr, i, 0)
 
-class TreeSort(Algorithm):
-    pass
 #checked5
 class ShellSort(Algorithm):
     def __init__(self):
@@ -224,7 +219,7 @@ class ShellSort(Algorithm):
             gap //= 2
             
 #bad
-class BucketSort(Algorithm):
+'''class BucketSort(Algorithm):
     def __init__(self):
         super().__init__("BucketSort") 
     def algorithm(self, array = []): 
@@ -251,8 +246,8 @@ class BucketSort(Algorithm):
             for j in range(len(arr[i])): 
                 x[k] = arr[i][j] 
                 k += 1
-        return array 
-class RadixSort(Algorithm):
+        return array '''
+'''class RadixSort(Algorithm):
     def __init__(self):
         super().__init__("RadixSort") 
     def algorithm(self, arr = []): 
@@ -306,7 +301,7 @@ class RadixSort(Algorithm):
         # so that arr now contains sorted numbers 
         i = 0
         for i in range(0, len(arr)): 
-            arr[i] = output[i] 
+            arr[i] = output[i] '''
 #checked4
 class CountingSort(Algorithm):
     def __init__(self):

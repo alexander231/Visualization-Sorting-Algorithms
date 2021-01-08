@@ -106,26 +106,7 @@ def menu_algorithms():
                 pygame.draw.rect(screen_Menu, RED, (800, 200, SQUARE_SIZE, SQUARE_SIZE))
             else:
                 pygame.draw.rect(screen_Menu, BLACK, (800, 200, SQUARE_SIZE, SQUARE_SIZE))
-            if X_MOUSE < 200 and Y_MOUSE > 400 :
-                pygame.draw.rect(screen_Menu, RED, (0, 400, SQUARE_SIZE, SQUARE_SIZE))
-            else:
-                pygame.draw.rect(screen_Menu, TURQUOISE, (0, 400, SQUARE_SIZE, SQUARE_SIZE))
-            if X_MOUSE > 200 and X_MOUSE < 400 and Y_MOUSE > 400:
-                pygame.draw.rect(screen_Menu, RED, (200, 400, SQUARE_SIZE, SQUARE_SIZE))
-            else:
-                pygame.draw.rect(screen_Menu, BLACK, (200, 400, SQUARE_SIZE, SQUARE_SIZE))
-            if X_MOUSE > 400 and X_MOUSE < 600 and Y_MOUSE > 400:
-                pygame.draw.rect(screen_Menu, RED, (400, 400, SQUARE_SIZE, SQUARE_SIZE))
-            else:
-                pygame.draw.rect(screen_Menu, TURQUOISE, (400, 400, SQUARE_SIZE, SQUARE_SIZE))
-            if X_MOUSE > 600 and X_MOUSE < 800 and Y_MOUSE > 400:
-                pygame.draw.rect(screen_Menu, RED, (600, 400, SQUARE_SIZE, SQUARE_SIZE))
-            else:
-                pygame.draw.rect(screen_Menu, BLACK, (600, 400, SQUARE_SIZE, SQUARE_SIZE))
-            if X_MOUSE > 800 and Y_MOUSE > 400:
-                pygame.draw.rect(screen_Menu, RED, (800, 400, SQUARE_SIZE, SQUARE_SIZE))
-            else:
-                pygame.draw.rect(screen_Menu, TURQUOISE, (800, 400, SQUARE_SIZE, SQUARE_SIZE))
+            
 
             draw_Text_center("BubbleSort", font, WHITE, screen_Menu, 100, 100)
             
@@ -135,38 +116,76 @@ def menu_algorithms():
 
             draw_Text_center("InsertionSort", font, WHITE, screen_Menu, 700, 100)
 
-            draw_Text_center("MergeSort", font, WHITE, screen_Menu, 900, 100)
+            draw_Text_center("QuickSort", font, WHITE, screen_Menu, 900, 100)
 
-            draw_Text_center("QuickSort", font, WHITE, screen_Menu, 100, 300)
+            draw_Text_center("HeapSort", font, WHITE, screen_Menu, 100, 300)
 
-            draw_Text_center("HeapSort", font, WHITE, screen_Menu, 300, 300)
+            draw_Text_center("ShellSort", font, WHITE, screen_Menu, 300, 300)
 
-            draw_Text_center("TreeSort", font, WHITE, screen_Menu, 500, 300)
+            draw_Text_center("MergeSort", font, WHITE, screen_Menu, 500, 300)
 
-            draw_Text_center("ShellSort", font, WHITE, screen_Menu, 700, 300)
+            draw_Text_center("CountingSort", font, WHITE, screen_Menu, 700, 300)
 
-            draw_Text_center("BucketSort", font, WHITE, screen_Menu, 900, 300)
-
-            draw_Text_center("RadixSort", font, WHITE, screen_Menu, 100, 500)
-
-            draw_Text_center("CountingSort", font, WHITE, screen_Menu, 300, 500)
-
-            draw_Text_center("CubeSort", font, WHITE, screen_Menu, 500, 500)
-            
-            draw_Text_center("TimSort", font, WHITE, screen_Menu, 700, 500)
-
-            draw_Text_center("Exit", font, WHITE, screen_Menu, 900, 500)
+            draw_Text_center("EXIT", font, WHITE, screen_Menu, 900, 300)
             
             if X_MOUSE < 200 and Y_MOUSE < 200 and event.type == pygame.MOUSEBUTTONDOWN:
                 
-                algorithm = algos.RadixSort()
+                algorithm = algos.BubbleSort()
                 
                 time_elapsed = algorithm.run()[1]
     
                 keep_open(algorithm, screen_Menu, time_elapsed)
+
+            if X_MOUSE > 200 and X_MOUSE < 400 and Y_MOUSE < 200 and event.type == pygame.MOUSEBUTTONDOWN:
                 
-            if X_MOUSE > 800 and Y_MOUSE > 400 and event.type == pygame.MOUSEBUTTONDOWN:
+                algorithm = algos.OptimizedBubbleSort()
                 
+                time_elapsed = algorithm.run()[1]
+    
+                keep_open(algorithm, screen_Menu, time_elapsed)
+            if X_MOUSE > 400 and X_MOUSE < 600 and Y_MOUSE < 200 and event.type == pygame.MOUSEBUTTONDOWN:
+                
+                algorithm = algos.SelectionSort()
+                
+                time_elapsed = algorithm.run()[1]
+    
+                keep_open(algorithm, screen_Menu, time_elapsed)
+            if X_MOUSE > 600 and X_MOUSE < 800 and Y_MOUSE < 200 and event.type == pygame.MOUSEBUTTONDOWN:
+                
+                algorithm = algos.InsertionSort()
+                
+                time_elapsed = algorithm.run()[1]
+    
+                keep_open(algorithm, screen_Menu, time_elapsed)
+            if X_MOUSE > 800 and Y_MOUSE < 200 and event.type == pygame.MOUSEBUTTONDOWN:
+                
+                algorithm = algos.QuickSort()
+                
+                time_elapsed = algorithm.run()[1]
+    
+                keep_open(algorithm, screen_Menu, time_elapsed)
+            if X_MOUSE < 200 and Y_MOUSE > 200 and event.type == pygame.MOUSEBUTTONDOWN:
+                
+                algorithm = algos.HeapSort()
+                
+                time_elapsed = algorithm.run()[1]
+    
+                keep_open(algorithm, screen_Menu, time_elapsed)
+            if X_MOUSE > 200 and X_MOUSE < 400 and Y_MOUSE > 200 and event.type == pygame.MOUSEBUTTONDOWN:
+                
+                algorithm = algos.ShellSort()
+                
+                time_elapsed = algorithm.run()[1]
+
+                keep_open(algorithm, screen_Menu, time_elapsed)
+                
+            if X_MOUSE > 600 and X_MOUSE < 800 and Y_MOUSE > 200 and event.type == pygame.MOUSEBUTTONDOWN:
+                algorithm = algos.CountingSort()
+
+                time_elapsed = algorithm.run()[1]
+
+                keep_open(algorithm, screen_Menu, time_elapsed)
+            if X_MOUSE > 800 and  Y_MOUSE > 200 and event.type == pygame.MOUSEBUTTONDOWN:
                 pygame.quit()
                 sys.exit()
             pygame.display.update()
