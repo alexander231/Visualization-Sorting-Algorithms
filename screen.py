@@ -3,7 +3,7 @@ import pygame
 import time
 import sys
 import algos
-from constants import ROWS, COLS, SQUARE_SIZE, MENU_DIMENSIONS, SORTING_DIMENSIONS, BG_COLOR, BLACK, RED, TURQUOISE, WHITE
+from constants import SQUARE_SIZE, MENU_DIMENSIONS, SORTING_DIMENSIONS, BLACK, RED, TURQUOISE, WHITE
 
 pygame.init()
 
