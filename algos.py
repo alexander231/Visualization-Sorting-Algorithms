@@ -1,12 +1,12 @@
 import numpy as np
 import random
 import time
-import pygame
 
+# The sorting algorithms will be subclasses of the class Algorithm
 class Algorithm:
 
     def __init__(self, name):
-        # This is a random array of size 1024, with elements from 0 to 1024
+        # This is a random array of size 512, with elements from 0 to 512
         self.array = list(np.random.randint(513, size = 512))
         # The name of the sorting algorithm that whe choose
         self.name = name
@@ -26,77 +26,111 @@ class Algorithm:
 
 
 
-#checked8
+#checked 9
 class InsertionSort(Algorithm):
+
     def __init__(self):
         super().__init__("InsertionSort")
     
     def algorithm(self):
+
         for i in range(1, len(self.array)):
             key = self.array[i]
             index = i - 1
             while index >= 0 and self.array[index] > key:
+
                 self.array[index + 1] = self.array[index]
                 index -= 1
+
             self.array[index + 1] = key
+
             self.update_screen(self.array[index + 1], self.array[i])
-#bad
+
+        self.update_screen()
+
+#checked 8
 class MergeSort(Algorithm):
+
     def __init__(self):
         super().__init__("MergeSort")
 
-    def algorithm(self, array = []):
-        if array == []:
-            array = self.array
-        if len(array) > 1:
-    
-            # Finding the mid of the array
-            mid = len(array)//2
-    
-            # Dividing the array elements
-            L = array[:mid]
-            self.update_screen()
-            # into 2 halves
-            R = array[mid:]
-            self.update_screen()
-    
-            # Sorting the first half
-            self.algorithm(L)
+    def algorithm(self, a = []): 
+        if a == []:
+            a = self.array
+        current_size = 1
+        
+        # Outer loop for traversing Each 
+        # sub array of current_size 
+        while current_size < len(a) - 1: 
             
-            # Sorting the second half
-            self.algorithm(R)
-            
-            i = j = k = 0
+            left = 0
+            # Inner loop for merge call 
+            # in a sub array 
+            # Each complete Iteration sorts 
+            # the iterating sub array 
+            while left < len(a)-1: 
+                
+                # mid index = left index of 
+                # sub array + current sub 
+                # array size - 1 
+                mid = min((left + current_size - 1),(len(a)-1))
+                
+                # (False result,True result) 
+                # [Condition] Can use current_size 
+                # if 2 * current_size < len(a)-1 
+                # else len(a)-1 
+                right = ((2 * current_size + left - 1, 
+                        len(a) - 1)[2 * current_size 
+                            + left - 1 > len(a)-1]) 
+                                
+                # Merge call for each sub array 
+                self.merge(a, left, mid, right) 
+                left = left + current_size*2
+                
+            # Increasing sub array size by 
+            # multiple of 2 
+            current_size = 2 * current_size 
+        
+    # Merge Function
+    def merge(self, a, l, m, r): 
+        n1 = m - l + 1
+        n2 = r - m 
+        L = [0] * n1 
+        R = [0] * n2 
+        for i in range(0, n1): 
+            L[i] = a[l + i] 
+        for i in range(0, n2): 
+            R[i] = a[m + i + 1] 
     
-            # Copy data to temp arrays L[] and R[]
-            while i < len(L) and j < len(R):
-                if L[i] < R[j]:
-                    array[k] = L[i]
-                    
-                    i += 1
-                else:
-                    array[k] = R[j]
-                    
-                    j += 1
-                k += 1
-                
-                
-            # Checking if any element was left
-            while i < len(L):
-                array[k] = L[i]
-                
-                i += 1
-                k += 1
-    
-            while j < len(R):
-                array[k] = R[j]
-                
+        i, j, k = 0, 0, l 
+        while i < n1 and j < n2: 
+            if L[i] > R[j]: 
+
+                self.update_screen(a[k], R[j])
+
+                a[k] = R[j] 
                 j += 1
-                k += 1
-             
-            print(self.array)
+                
+            else: 
+
+                self.update_screen(a[k], L[i])
+
+                a[k] = L[i]  
+                i += 1
+            k += 1
             
-#checked7
+        while i < n1: 
+            a[k] = L[i] 
+            i += 1
+            k += 1
+    
+        while j < n2: 
+            a[k] = R[j] 
+            j += 1
+            k += 1
+        self.update_screen()
+            
+#checked 7
 class QuickSort(Algorithm):
     def __init__(self):
         super().__init__("QuickSort")
@@ -117,9 +151,13 @@ class QuickSort(Algorithm):
                 self.update_screen(arr[i], arr[j])
         
         arr[i + 1], arr[high] = arr[high], arr[i + 1]
+
+        self.update_screen()
+
         return i + 1
 
     def algorithm(self, arr = [], low = 0, high = 0):
+
         if arr == []:
             arr = self.array
             high = len(arr) - 1
@@ -131,7 +169,7 @@ class QuickSort(Algorithm):
             self.algorithm(arr, low, pi - 1)
             self.algorithm(arr, pi + 1, high)
 
-#checked6
+#checked 6
 class HeapSort(Algorithm):
     def __init__(self):
         super().__init__("HeapSort")
@@ -158,10 +196,10 @@ class HeapSort(Algorithm):
             self.update_screen(arr[i], arr[largest])
             # Heapify the root.
             self.heapify(arr, n, largest)
-    
+
+        self.update_screen()
+
     # The main function to sort an array of given size
- 
- 
     def algorithm(self, arr =[]):
         if arr == []:
             arr = self.array
@@ -176,12 +214,14 @@ class HeapSort(Algorithm):
             arr[i], arr[0] = arr[0], arr[i]  # swap
             self.heapify(arr, i, 0)
 
-#checked5
+#checked 5
 class ShellSort(Algorithm):
     def __init__(self):
         super().__init__("ShellSort")
+
     # Start with a big gap, then reduce the gap 
     def algorithm(self, arr = []):
+
         if arr == []:
             arr = self.array
         n = len(arr) 
@@ -217,92 +257,9 @@ class ShellSort(Algorithm):
                 
                 self.update_screen(arr[i], arr[j])    
             gap //= 2
+        self.update_screen()
             
-#bad
-'''class BucketSort(Algorithm):
-    def __init__(self):
-        super().__init__("BucketSort") 
-    def algorithm(self, array = []): 
-        if array == []:
-            array = self.array
-        arr = [] 
-        slot_num = 1024 # 10 means 10 slots, each 
-                    # slot's size is 0.1 
-        for i in range(slot_num): 
-            arr.append([]) 
-            
-        # Put array elements in different buckets  
-        for j in array: 
-            index_b = int(slot_num * j)  
-            arr[index_b].append(j) 
-        
-        # Sort individual buckets  
-        for i in range(slot_num): 
-            arr[i] = InsertionSort.algorithm(arr[i]) 
-            
-        # concatenate the result 
-        k = 0
-        for i in range(slot_num): 
-            for j in range(len(arr[i])): 
-                x[k] = arr[i][j] 
-                k += 1
-        return array '''
-'''class RadixSort(Algorithm):
-    def __init__(self):
-        super().__init__("RadixSort") 
-    def algorithm(self, arr = []): 
-        if arr == []:
-            arr = self.array
-        # Find the maximum number to know number of digits 
-        max1 = max(arr) 
-    
-        # Do counting sort for every digit. Note that instead 
-        # of passing digit number, exp is passed. exp is 10^i 
-        # where i is current digit number 
-        exp = 1
-        while max1 / exp > 0: 
-            
-            self.countingSort(arr, exp) 
-            exp *= 10
-        
-             
-    def countingSort(self, arr, exp1): 
-  
-        n = len(arr) 
-    
-        # The output array elements that will have sorted arr 
-        output = [0] * (n) 
-    
-        # initialize count array as 0 
-        count = [0] * (10) 
-    
-        # Store count of occurrences in count[] 
-        for i in range(0, n): 
-            index = (arr[i] / exp1) 
-            count[int(index % 10)] += 1
-    
-        # Change count[i] so that count[i] now contains actual 
-        # position of this digit in output array 
-        for i in range(1, 10): 
-            count[i] += count[i - 1] 
-    
-        # Build the output array 
-        i = n - 1
-        while i >= 0: 
-            
-            index = (arr[i] / exp1) 
-            
-            output[count[int(index % 10)] - 1] = arr[i] 
-            count[int(index % 10)] -= 1
-            i -= 1
-            
-    
-        # Copying the output array to arr[], 
-        # so that arr now contains sorted numbers 
-        i = 0
-        for i in range(0, len(arr)): 
-            arr[i] = output[i] '''
-#checked4
+#checked 4
 class CountingSort(Algorithm):
     def __init__(self):
         super().__init__("CountingSort")
@@ -339,9 +296,11 @@ class CountingSort(Algorithm):
         for i in range(0, size):
             array[i] = output[i]
             self.update_screen(array[i], output[i])
-        
-#checked3
+
+        self.update_screen()
+#checked 3
 class OptimizedBubbleSort(Algorithm):
+
     def __init__(self):
         super().__init__("OptimizedBubbleSort")
     
@@ -350,30 +309,41 @@ class OptimizedBubbleSort(Algorithm):
         for i in range(len(self.array)):
             swapped = True
             for j in range(0, len(self.array) - i - 1):
+
                 if self.array[j] > self.array[j + 1]:
+
                     self.array[j], self.array[j + 1] = self.array[j +1], self.array[j]
                     swapped = False
 
                     if swapped:
                         break
+
             self.update_screen(self.array[j], self.array[j + 1])
-#checked2
+
+        self.update_screen()
+
+#checked 2
 class BubbleSort(Algorithm):
+
     def __init__(self):
         super().__init__("BubbleSort")
 
     def algorithm(self):
 
         for i in range(len(self.array)):
-            
+
             for j in range(0, len(self.array) - i - 1):
                 
                 if self.array[j] > self.array[j + 1]:
                     self.array[j], self.array[j + 1] = self.array[j + 1], self.array[j]
+
             self.update_screen(self.array[j], self.array[j + 1])
-            
-#checked1
+
+        self.update_screen()       
+
+#checked 1
 class SelectionSort(Algorithm):
+
     def __init__(self):
         super().__init__("SelectionSort")
 
@@ -385,8 +355,6 @@ class SelectionSort(Algorithm):
                     minimum_index = j
             self.array[i], self.array[minimum_index] = self.array[minimum_index], self.array[i]
             self.update_screen(self.array[i], self.array[minimum_index])
-                # The most important step that renders the rectangles to the screen that gets sorted.
-                # pygame.draw.rect(dsiplay_window, color_of_rectangle, size_of_rectangle)
                 
-
+        self.update_screen()
 
