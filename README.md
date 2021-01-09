@@ -1,6 +1,6 @@
 # Documentation
 
-- The Project should be compiled from the scree.py file
+- The Project should be compiled from the screen.py file
 - Project built full in python
 - Built a GUI for selecting sorting algorithms with pygame
 - Implemented sorting algorithms like QuickSort, MergeSort, SelectionSort, etc.
